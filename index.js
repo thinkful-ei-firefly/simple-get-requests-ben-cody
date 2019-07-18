@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 'use strict';
-/* global $ */
 
 function getDogImage(num) {
   const url = 'https://dog.ceo/api/breeds/image/random/';
@@ -8,7 +7,8 @@ function getDogImage(num) {
   fetch(url + num)
     .then(response => response.json())
     .then(jsonData => extractData(jsonData))
-    .then(messages => renderImages(messages));
+    .then(messages => renderImages(messages))
+    .catch(error => console.log(error));
 }
 
 function getBreedImage(breed) {
@@ -21,7 +21,8 @@ function getBreedImage(breed) {
 }
 
 function handleUserSubmit() {
-  $('.rando-breed').submit(event => {
+  $('.rando-dog').submit(event => {
+    console.log(event.currentTarget);
     event.preventDefault();
     const num = $(event.currentTarget)
       .find('input[id="number"]')
@@ -30,13 +31,15 @@ function handleUserSubmit() {
   });
 }
 
-
-// add if else for case of single image
-function renderImages(messages) {
+function renderImages(message) {
   $('.dog-imgs').html('<h2>Dog Pics</h2>');
-  messages.forEach(imgUrl => {
-    $('.dog-imgs').append(`<img src="${imgUrl}" alt="dog image">`);
-  });
+  if (typeof message === 'object') {
+    message.forEach(imgUrl => {
+      $('.dog-imgs').append(`<img src="${imgUrl}" alt="dog image">`);
+    });
+  } else {
+    $('.dog-imgs').append(`<img src="${message}" alt="dog image">`);
+  }
 }
 
 function extractData(data) {
