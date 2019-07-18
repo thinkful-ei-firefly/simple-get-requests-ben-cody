@@ -3,17 +3,15 @@
 
 function getDogImage(num) {
   const url = 'https://dog.ceo/api/breeds/image/random/';
-  console.log(url + num);
   fetch(url + num)
     .then(response => response.json())
     .then(jsonData => extractData(jsonData))
-    .then(messages => renderImages(messages))
-    .catch(error => alert(error));
+    .then(data => renderImages(data))
+    .catch(error => console.log(error));
 }
 
 function getBreedImage(breed) {
   const url = `https://dog.ceo/api/breed/${breed}/images/random`;
-  console.log(url);
   fetch(url)
     .then(response => response.json())
     .then(jsonData => extractData(jsonData))
@@ -22,7 +20,6 @@ function getBreedImage(breed) {
 
 function handleUserSubmit() {
   $('.rando-dog').submit(event => {
-    console.log(event.currentTarget);
     event.preventDefault();
     const num = $(event.currentTarget)
       .find('input[id="number"]')
@@ -31,21 +28,28 @@ function handleUserSubmit() {
   });
 }
 
-function renderImages(message) {
-  $('.dog-imgs').html('<h2>Dog Pics</h2>');
-  if (typeof message === 'object') {
-    message.forEach(imgUrl => {
+function renderImages(dataArr) {
+  if (dataArr[1] === 'error') {
+    $('.dog-imgs').html(`
+    <h2>Error!</h2>
+    <p>${dataArr[0]}</p>
+    <img src='https://www.petsuppliesplus.com/-/media/Images/PSP/Product%20Images/2017/03/29/20/59/750683200043_4.ashx?h=590?h=453' alt="empty dog cage">
+  `);
+  } else if (typeof dataArr[0] === 'object') {
+    console.log(dataArr[0]);
+    $('.dog-imgs').html('<h2>Dog Pics</h2>');
+    dataArr[0].forEach(imgUrl => {
       $('.dog-imgs').append(`<img src="${imgUrl}" alt="dog image">`);
     });
   } else {
-    $('.dog-imgs').append(`<img src="${message}" alt="dog image">`);
+    console.log(dataArr[0]);
+    $('.dog-imgs').append(`<img src="${dataArr[0]}" alt="dog image">`);
   }
 }
 
 function extractData(data) {
-  let { message } = data;
-  console.log(message);
-  return message;
+  const { message, status } = data;
+  return [message, status];
 }
 
 function handleBreedSubmit() {
