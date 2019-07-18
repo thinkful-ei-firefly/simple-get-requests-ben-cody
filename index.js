@@ -8,7 +8,7 @@ function getDogImage(num) {
     .then(response => response.json())
     .then(jsonData => extractData(jsonData))
     .then(messages => renderImages(messages))
-    .catch(error => console.log(error));
+    .catch(error => alert(error));
 }
 
 function getBreedImage(breed) {
