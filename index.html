@@ -9,13 +9,15 @@
 <body>
   <header><h1>GET RANDOM DOG IMAGE</h1></header>
   <main>
-    <form>
+    <form class="rando-dog">
       <label for="number">Choose a number of random dog images to display:</label>
       <input type="number" id="number" name="number" value="3" min="1" max="50" required>
     </form>
+    <form class="select-breed">
+      <label for="breed">Input a breed:</label>
+      <input type="text" id="breed" name="breed" required>
+    </form>
     <section class="dog-imgs">
-      <h2>Dog Pics</h2>
-      
     </section>
   </main>
   <script
