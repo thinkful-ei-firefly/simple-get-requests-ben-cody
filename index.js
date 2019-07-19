@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 'use strict';
+/* global $ */
 
 function getDogImage(num) {
   const url = 'https://dog.ceo/api/breeds/image/random/';
@@ -62,4 +63,4 @@ function binder() {
   handleBreedSubmit();
 }
 
-$(binder());
+$(binder);

@@ -1,3 +1,22 @@
-section{
-  display: flex;
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+main p {
+  font-weight: bold;
+}
+
+.dog-imgs {
+  width: 100px;
+}
+
+img {
+  width: 300px;
 }
