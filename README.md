@@ -1,2 +1,2 @@
 # Simple Get Request (Cody & Ben)
-This app allows a user to display random dog images (up to 50) or a single random image of the breed that they input.
+This app allows a user to display any number of random dog images from 1 to 50, or alternately, a single random image of a breed that they input. If the breed is not found, an error message displays in the DOM.
